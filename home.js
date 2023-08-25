@@ -10,7 +10,6 @@ let currentOrderBy = 'date'; // Inicialmente, assume ordenação por data
 
 
 function findTransactions(user) {
-    showLoading();
     firebase.firestore()
         .collection('transactions')
         .where('user.uid', '==', user.uid)

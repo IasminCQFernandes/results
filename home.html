@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>RAMAIS</title>
+    <link rel="shortcut icon" href="../../src/icon.png" type="image/png">
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <header>
+        <img src="./src/logo.jpg" alt="">
+        <h2>LISTA DE RAMAIS</h2>
+        <h1>LCM Construção</h1>
+        
+    </header>
+    <div class="print">
+        <img src="./src/logo.jpg" alt="">
+        <h2>LISTA DE RAMAIS</h2>
+        <h1>LCM Construção</h1>
+    </div>
+    <div class="ordenar">
+        <div class="filtro">
+            <input type="text" id="inputNome" placeholder="Filtrar por Nome">
+            <input type="text" id="inputSetor" placeholder="Filtrar por Setor">
+            <button onclick="realizarFiltragem()">Filtrar</button>
+            
+        </div>
+        <div class="ordemAlf">
+        <p>Ordenar: </p>
+            <button onclick="ordNome()" class="ordenador">Nome -  <sup>A</sup><sub>Z</sub></button>
+            <button onclick="ordSetor()" class="ordenador">Setor - <sup>A</sup><sub>Z</sub></button>
+            <button id="print-button" onclick="imprimir()"><img src="./src/print-48.png" alt=""></button>
+        </div>
+    </div>
+    <div class="cabecalho">
+        <p>NOME</p>
+        <p>SETOR | RAMAL</p>
+        <p id="email">E-MAIL</p>
+        
+    </div>
+   
+    
+    
+    
+    <ol id="transactions" class="grid-container"></ol>
+</body>
+
+<link rel="stylesheet" href="./global.css">
+<link rel="stylesheet" href="home.css">
+
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore-compat.js"></script>
+<script src="./firebase-init.js"></script>
+<script src="../../auth-guard.js"></script>
+<script src="../../loading.js"></script>
+<script src="home.js"></script>
+
+</html>

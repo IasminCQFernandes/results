@@ -1,0 +1,110 @@
+body {
+    height: 100vh;
+}
+#email{
+    padding:  10px 0 10px 10px;
+}
+
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+ol li {
+    background: white;
+    padding: 8px 16px;
+    border-bottom: 1px solid gray;
+}
+
+
+ol li.expense {
+    border-left: 10px solid red;
+}
+ol li.income {
+    border-left: 10px solid green;
+}
+ol li:hover button.danger {
+    display: block;
+}
+
+button.danger {
+    width: auto;
+    float: right;
+    display: none;
+}
+
+p {
+    margin: 4px 0;
+    width: 33%;
+}
+.cabecalho{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 0px;
+    background-color: rgb(218, 254, 225);
+    border-bottom: 1px solid gray;
+    width: 100%;
+}
+.cabecalho p{
+
+    width: 33%;
+    text-align: start;
+}
+#print-button{
+    background-color: #cccccc00;
+    border: none;
+    width: 70px;
+}
+
+
+@media print {
+    /* Estilos para a versão de impressão */
+    body {
+        font-size: 7pt;
+        box-sizing: border-box;
+    }
+
+    .width{
+        font-size: 8pt;
+        width: auto;
+        justify-content: start;
+    }
+    .transaction-nome{
+        width:30%;
+        /* font-weight: bold; */
+    }
+    .transaction-setor{
+        width:70%;
+
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* Três colunas de tamanho igual */
+        gap: 0px; /* Espaçamento entre os itens */
+        list-style: none; /* Remover marcadores de lista */
+        padding: 0;
+        margin-top: 0;
+
+    }
+      
+      .grid-container li {
+        border: 1px solid #ccc;
+        padding: 1px;
+        height: 37px;
+      }
+      
+      
+      .ordemAlf, .filtro, .cabecalho, .none, #email,  #print-button, header{
+        display: none;
+    }
+    .print{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #fff;
+        color: #5c5c5c;
+        margin-bottom: 0;
+    }
+  
+}

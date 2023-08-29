@@ -21,6 +21,7 @@ header button {
 }
 header{
     display: flex;
+    flex-direction: column;
     position: relative;
     top: 0;
     width: 100%;
@@ -29,6 +30,13 @@ header{
     background-color: #fff;
     color: #5c5c5c;
 }
+.box, .endereco{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
 .cabecalho{
     display: flex;
     justify-content: space-between;

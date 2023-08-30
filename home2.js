@@ -1,52 +1,34 @@
+let sortOrderAsc = true;
+let transactionsData = []; // Stores the initially fetched data
+dados();
 
-
-// firebase.auth().onAuthStateChanged(user => {
-//     if (user){
-//         findTransactions(user);
-//     }
-// })
-
-let currentOrderBy = 'date'; // Inicialmente, assume ordenação por data
-findTransactions()
-
-function findTransactions() {
+function dados() {
     firebase.firestore()
         .collection('transactions')
-        // .where('user.uid', '==', user.uid)
-        .orderBy('date', 'asc')
+        .orderBy('date', 'desc')
         .get()
         .then(snapshot => {
-            hideLoading();
-            const transactions = snapshot.docs.map(doc => ({
-                ...doc.data(),
-                uid: doc.id
-            }));
-            addTransactionsToScreen(transactions);
-        })
-        .catch(error => {
-            hideLoading();
-            console.log(error);
-            alert('Erro ao recuperar transacoes');
-        })
+            transactionsData = snapshot.docs.map(doc => doc.data());
+            addTransactionsToScreen(transactionsData); // Display initial data
+        });
 }
-let sortOrderAsc = true; // Inicialmente, assume ordenação crescente
 
 function ordNome() {
     clearTransactionList();
 
     const sortOrder = sortOrderAsc ? 'asc' : 'desc';
 
-    firebase.firestore()
-        .collection('transactions')
-        .orderBy('date', sortOrder)
-        .get()
-        .then(snapshot => {
-            const transactions = snapshot.docs.map(doc => doc.data());
-            addTransactionsToScreen(transactions);
-        });
+    const sortedTransactions = [...transactionsData];
 
-    sortOrderAsc = !sortOrderAsc; // Inverte o estado da ordenação
+    sortedTransactions.sort((a, b) => {
+        return sortOrder === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date);
+    });
+
+    addTransactionsToScreen(sortedTransactions);
+
+    sortOrderAsc = !sortOrderAsc; // Toggle sorting order
 }
+
 function ordSetor() {
     clearTransactionList();
 
@@ -63,12 +45,14 @@ function ordSetor() {
 
     sortOrderAsc = !sortOrderAsc; // Inverte o estado da ordenação
 }
+
 function clearTransactionList() {
     const orderedList = document.getElementById('transactions');
     while (orderedList.firstChild) {
         orderedList.removeChild(orderedList.firstChild);
     }
 }
+
 function realizarFiltragem() {
     const nomeFiltro = document.getElementById('inputNome').value.toLowerCase();
     const setorFiltro = document.getElementById('inputSetor').value.toLowerCase();
@@ -94,9 +78,6 @@ function addTransactionsToScreen(transactions) {
         const li = document.createElement('li');
         li.classList.add(transaction.type);
         li.id = transaction.uid;
-        
-
-        
 
         const date = document.createElement('p');
         date.innerHTML = transaction.date;
@@ -118,23 +99,16 @@ function addTransactionsToScreen(transactions) {
         type.innerHTML = transaction.transactionType;
         li.appendChild(type);
 
-        
-        
-
-
         orderedList.appendChild(li);
     });
 }
+
 function imprimir() {
-        
     window.print();
 }
 
-
-// function formatDate(date) {
-//     return new Date(date).toLocaleDateString('pt-br');
-// }
-
 function formatMoney(money) {
-    return `${money.currency} ${money.value}`
+    return `${money.currency} ${money.value}`;
 }
+
+// Chame as funções de ordenação ao carregar a página

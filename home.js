@@ -10,6 +10,7 @@ let currentOrderBy = 'date'; // Inicialmente, assume ordenação por data
 findTransactions()
 
 function findTransactions() {
+    showLoading()
     firebase.firestore()
         .collection('transactions')
         // .where('user.uid', '==', user.uid)
@@ -85,6 +86,13 @@ function realizarFiltragem() {
             transaction.style.display = 'none';
         }
     });
+}
+
+function retirarFiltragem() {
+    document.getElementById('inputNome').value = '';
+    document.getElementById('inputSetor').value = '';
+
+    realizarFiltragem()
 }
 
 function addTransactionsToScreen(transactions) {

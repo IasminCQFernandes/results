@@ -35,7 +35,7 @@ let sortOrderAsc = true; // Inicialmente, assume ordenação crescente
 function ordNome() {
     clearTransactionList();
 
-    const sortOrder = sortOrderAsc ? 'asc' : 'desc';
+    const sortOrder = sortOrderAsc ? 'desc' : 'asc';
 
     firebase.firestore()
         .collection('transactions')
